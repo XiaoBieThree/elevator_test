@@ -14,17 +14,16 @@ import shuzi9 from '../assets/svgs/shuzi9.svg';
 import shuzi10 from '../assets/svgs/shuzi10.svg';
 import shuzi11 from '../assets/svgs/shuzi11.svg';
 import shuzi12 from '../assets/svgs/shuzi12.svg';
-import shuzi13 from '../assets/svgs/shuzi13.svg';
-import shuzi14 from '../assets/svgs/shuzi14.svg';
 import shuzi15 from '../assets/svgs/shuzi15.svg';
 import shuzi16 from '../assets/svgs/shuzi16.svg';
 import shuzi17 from '../assets/svgs/shuzi17.svg';
 import shuzi19 from '../assets/svgs/shuzi19.svg';
 import shuzi20 from '../assets/svgs/shuzi20.svg';
 import shuzi21 from '../assets/svgs/shuzi21.svg';
+import shuzi22 from '../assets/svgs/shuzi22.svg';
 
 const { Header, Footer, Content } = Layout;
-const svgList = { shuzi1, shuzi2, shuzi3, shuzi5, shuzi6, shuzi7, shuzi8, shuzi9, shuzi10, shuzi11, shuzi12, shuzi13, shuzi14, shuzi15, shuzi16, shuzi17, shuzi19, shuzi20, shuzi21 };
+const svgList = { shuzi1, shuzi2, shuzi3, shuzi5, shuzi6, shuzi7, shuzi8, shuzi9, shuzi10, shuzi11, shuzi12, shuzi15, shuzi16, shuzi17, shuzi19, shuzi20, shuzi21, shuzi22 };
 
 function ControlPanel() {
   React.useEffect(()=>{
