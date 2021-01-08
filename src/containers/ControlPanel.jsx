@@ -22,45 +22,83 @@ import shuzi20 from '../assets/svgs/shuzi20.svg';
 import shuzi21 from '../assets/svgs/shuzi21.svg';
 import shuzi22 from '../assets/svgs/shuzi22.svg';
 
+const { useEffect } = React;
 const { Header, Footer, Content } = Layout;
 const svgList = { shuzi1, shuzi2, shuzi3, shuzi5, shuzi6, shuzi7, shuzi8, shuzi9, shuzi10, shuzi11, shuzi12, shuzi15, shuzi16, shuzi17, shuzi19, shuzi20, shuzi21, shuzi22 };
 
 function ControlPanel() {
-  React.useEffect(()=>{
-    floorRender();
-  },  []);
-  React.useEffect(()=>{
-    console.log("每次更新后对会执行",  floorNow);
-  });
-  const [state, setState] = useState({});
+  const [floorNow, setfloorNum] = useState('');
+  const [onClickNow, setCLickNum] = useState([]);
 
+  // componentDidMount阶段
+  useEffect(()=>{ floorRender(); }, []);
+
+  // 获取全部楼层数
   const floorRender = () => {
     let floorNum = [];
-    const expectNum = [4, 13, 14, 23, 24];
-    for(let i = 0; i < 25; i++) {
+    const expectNum = [4, 13, 14, 18, 23, 24];
+    for(let i = 1; i < 25; i++) {
       const expect = _.some(expectNum, item => item === i);
       if (!expect) {
         floorNum.push(i);
       }
     }
-    setState({ floorNow: floorNum });
+    setfloorNum(floorNum);
     return floorNum;
   };
 
-  const { floorNow } = state;
+  // 获取电梯内被按下的楼层
+  const imgOnClick = e => {
+    
+  }
+
+  // 渲染电梯内部楼层按钮
   const floorNumList = _.map(floorNow, (item, index) => {
-    console.log(item, floorNow);
-    return (
-      <img className={styles.img} src={svgList[`shuzi${index + 1}`]} alt="logo" />
-    )
-  })
+    const isLight = _.some(onClickNow, i => Number(i) === Number(item))
+    return (<div
+      key={item}
+      onClick={() => {
+        const value = item;
+        // 判断所选楼层是否已存在
+        const hasItem = _.some(onClickNow, item => item === value);
+        if (hasItem) {
+          _.remove(onClickNow, item => item === value);
+        } else {
+          onClickNow.push(value);
+          onClickNow.sort((a, b) => a - b);
+        }
+        setCLickNum([...onClickNow]);
+        console.log(onClickNow);
+      }}
+      style={{ width: '100px', display:'inline-block', margin: '2px', position: 'relative', backgroundColor: `${isLight ? '#fff' : ''}`, height: '100px' }}
+    >
+      <img
+        key={`${item}+${index}`}
+        style={{
+          hergit: '50px',
+          width: '50px',
+          position: 'absolute',
+          margin: '0 auto',
+          lineHeight: '100px',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)'
+       }}
+        className={styles.img}
+        src={svgList[`shuzi${item}`]}
+        alt={item}
+        value={item}
+      />
+    </div>)
+  });
+
 
   return (
-    <div className={styles.outside}>
+    <div className={styles.outside} style={{ userSelect: 'none' }}>
       <Layout>
         <Header>Header</Header>
         <Content>
-          <div style={{  height: '600px', width: '300px', backgroundColor: '#ccc' }}>
+          <div style={{ height: '600px', width: '320px', backgroundColor: 'rgb(46, 46, 46)', justifyContent: 'center' }}>
             {floorNumList}
           </div>
         </Content>
