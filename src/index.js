@@ -1,17 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import logo from './assets/svgs/logo.svg';
+import './index.css';
+import ControlPanel from './containers/ControlPanel';
+import 'antd/dist/antd.css';
 
-ReactDOM.render(
+ReactDOM.render(  
   <React.StrictMode>
-    <App />
+    <div className="App" onselectstart="return false" unselectable="on">
+      <img src={logo} className="App-logo" alt="logo" />
+      <ControlPanel />
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
