@@ -7,7 +7,7 @@ import 'antd/dist/antd.css';
 
 ReactDOM.render(  
   <React.StrictMode>
-    <div className="App">
+    <div className="App" onselectstart="return false" unselectable="on">
       <img src={logo} className="App-logo" alt="logo" />
       <ControlPanel />
     </div>

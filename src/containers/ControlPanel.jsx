@@ -49,23 +49,29 @@ function ControlPanel() {
 
   // 获取电梯内被按下的楼层
   const imgOnClick = e => {
-    const value = e.target.alt;
-    // 判断所选楼层是否已存在
-    const hasItem = _.some(onClickNow, item => item === value);
-    if (hasItem) {
-      _.remove(onClickNow, item => item === value);
-    } else {
-      onClickNow.push(value);
-      onClickNow.sort((a, b) => a - b);
-    }
-    setCLickNum([...onClickNow]);
-    console.log(onClickNow);
+    
   }
 
   // 渲染电梯内部楼层按钮
   const floorNumList = _.map(floorNow, (item, index) => {
     const isLight = _.some(onClickNow, i => Number(i) === Number(item))
-    return (<div style={{ width: '100px', display:'inline-block', margin: '2px', position: 'relative', backgroundColor: `${isLight ? '#fff' : ''}`, height: '100px' }}>
+    return (<div
+      key={item}
+      onClick={() => {
+        const value = item;
+        // 判断所选楼层是否已存在
+        const hasItem = _.some(onClickNow, item => item === value);
+        if (hasItem) {
+          _.remove(onClickNow, item => item === value);
+        } else {
+          onClickNow.push(value);
+          onClickNow.sort((a, b) => a - b);
+        }
+        setCLickNum([...onClickNow]);
+        console.log(onClickNow);
+      }}
+      style={{ width: '100px', display:'inline-block', margin: '2px', position: 'relative', backgroundColor: `${isLight ? '#fff' : ''}`, height: '100px' }}
+    >
       <img
         key={`${item}+${index}`}
         style={{
@@ -82,7 +88,6 @@ function ControlPanel() {
         src={svgList[`shuzi${item}`]}
         alt={item}
         value={item}
-        onClick={imgOnClick}
       />
     </div>)
   });
